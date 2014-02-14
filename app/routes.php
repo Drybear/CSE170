@@ -51,6 +51,7 @@ Route::get('/', array('as' => 'home', function()
 }));
 
 Route::get('calendar', 'CalendarController@showCalendar');
+Route::get('quiz', 'QuizController@showQuiz');
 
 // App::missing(function($exception)
 // {

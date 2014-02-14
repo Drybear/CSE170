@@ -29,6 +29,10 @@
 			<p class="lead">
 			<a href='calendar' class="btn btn-danger">Calendar</a>
 		</div>
+		<div class="container">
+			<p class="lead">
+			<a href='quiz' class="btn btn-success">Quiz</a>
+		</div>
 		<!--<div class="panel-body">
 			<p><strong>{{trans('pages.sessiondata')}}:</strong></p>
 			<pre>{{ var_dump(Session::all()) }}</pre>
