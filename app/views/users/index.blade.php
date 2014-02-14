@@ -24,16 +24,16 @@ Home
 						<td><a href="{{ action('UserController@show', array($user->id)) }}">{{ $user->email }}</a></td>
 						<td>{{ $user->status }} </td>
 						<td>
-							<button class="btn btn-default" type="button" onClick="location.href='{{ action('UserController@edit', array($user->id)) }}'">Edit</button> 
+							<button class="btn btn-primary" type="button" onClick="location.href='{{ action('UserController@edit', array($user->id)) }}'">Edit</button> 
 							@if ($user->status != 'Suspended')
-								<button class="btn btn-default" type="button" onClick="location.href='{{ route('suspendUserForm', array($user->id)) }}'">Suspend</button> 
+								<button class="btn btn-warning" type="button" onClick="location.href='{{ route('suspendUserForm', array($user->id)) }}'">Suspend</button> 
 							@else
-								<button class="btn btn-default" type="button" onClick="location.href='{{ action('UserController@unsuspend', array($user->id)) }}'">Un-Suspend</button> 
+								<button class="btn btn-warning" type="button" onClick="location.href='{{ action('UserController@unsuspend', array($user->id)) }}'">Un-Suspend</button> 
 							@endif
 							@if ($user->status != 'Banned')
-								<button class="btn btn-default" type="button" onClick="location.href='{{ action('UserController@ban', array($user->id)) }}'">Ban</button> 
+								<button class="btn btn-danger" type="button" onClick="location.href='{{ action('UserController@ban', array($user->id)) }}'">Ban</button> 
 							@else
-								<button class="btn btn-default" type="button" onClick="location.href='{{ action('UserController@unban', array($user->id)) }}'">Un-Ban</button> 
+								<button class="btn btn-danger" type="button" onClick="location.href='{{ action('UserController@unban', array($user->id)) }}'">Un-Ban</button> 
 							@endif
 							
 							<button class="btn btn-default action_confirm" href="{{ action('UserController@destroy', array($user->id)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Delete</button></td>

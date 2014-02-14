@@ -33,7 +33,7 @@
           </div>
           <br>
           
-          <p><a class="btn btn-default" href="#" role="button">Start &raquo;</a></p>
+          <p><a class="btn btn-success" href="#" role="button">Start &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 

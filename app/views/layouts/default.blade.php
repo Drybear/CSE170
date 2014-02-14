@@ -19,7 +19,7 @@
 
 		<style>
 			body {
-				padding-top: 60px;
+				padding-top: 70px;
 			}
 		</style>
 
