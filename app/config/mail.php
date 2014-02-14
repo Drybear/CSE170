@@ -27,7 +27,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'cse170memdar@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -92,6 +92,6 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => 'memdarowns',
 
 );
