@@ -53,7 +53,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'memdar@memdar.com', 'name' => 'Memdar'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,5 +93,16 @@ return array(
 	*/
 
 	'password' => 'memdarowns',
+	
+	/*
+	|--------------------------------------------------------------------------
+	| SMTP Pretend
+	|--------------------------------------------------------------------------
+	|
+	| This is just so I can log mail instead of sending it.
+	|
+	*/
+	
+	'pretend' => false,
 
 );
