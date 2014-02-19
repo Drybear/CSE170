@@ -54,6 +54,8 @@
 	          </ul>
 	          <ul class="nav navbar-nav navbar-right">
 	            @if (Sentry::check())
+				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="{{ URL::to('/calendar') }}">Calendar</a></li>
+				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="{{ URL::to('/quiz') }}">Quiz</a></li>
 				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="/users/{{ Session::get('userId') }}">{{ Session::get('email') }}</a></li>
 				<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 				@else
@@ -90,7 +92,18 @@
 		<script>
 			$(document).ready(function()
 			{
+				var date = new Date();
+				var d = date.getDate();
+				var m = date.getMonth();
+				var y = date.getFullYear();
 				$('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,agendaWeek,agendaDay'
+					},
+					editable: true,
+					
 				})
 			});
 		</script>
