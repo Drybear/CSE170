@@ -41,6 +41,15 @@ Profile</h4>
             </div>
             {{ ($errors->has('lastName') ? $errors->first('lastName') : '') }}                
         </div>
+		
+		<div class="form-group {{ ($errors->has('google')) ? 'has-error' : '' }}" for="google">
+            {{ Form::label('edit_google', 'Google Calendar URL', array('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-10">
+              {{ Form::text('google', $user->google, array('class' => 'form-control', 'placeholder' => 'Google Calendar URL', 'id' => 'edit_google'))}}
+            </div>
+            {{ ($errors->has('google') ? $errors->first('google') : '') }}                
+        </div>
+		
 
         @if (Sentry::getUser()->hasAccess('admin'))
         <div class="form-group">
