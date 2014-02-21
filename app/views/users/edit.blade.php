@@ -17,7 +17,7 @@ Edit Profile
 @endif 
 
 Profile</h4>
-<div class="well">
+<div class="jumbotron">
 	{{ Form::open(array(
         'action' => array('UserController@update', $user->id), 
         'method' => 'put',
@@ -75,7 +75,7 @@ Profile</h4>
 </div>
 
 <h4>Change Password</h4>
-<div class="well">
+<div class="jumbotron">
     {{ Form::open(array(
         'action' => array('UserController@change', $user->id), 
         'class' => 'form-inline', 

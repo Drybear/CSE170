@@ -94,13 +94,38 @@
 			$(document).ready(function()
 			{
 				
-				$('#calendar').fullCalendar({
+				var calendar = $('#calendar').fullCalendar({
 					header: {
 						left: 'prev,next today',
 						center: 'title',
 						right: 'month,agendaWeek,agendaDay'
 					},
 					editable: true,
+					selectable: true,
+					selectHelper: true,
+					select: function(start, end, allDay)
+				{
+					/*
+						after selection user will be promted for enter title for event.
+					*/
+					var title = prompt('Event Title:');
+					/*
+						if title is enterd calendar will add title and event into fullCalendar.
+					*/
+					if (title)
+					{
+						calendar.fullCalendar('renderEvent',
+							{
+								title: title,
+								start: start,
+								end: end,
+								allDay: allDay
+							},
+							true // make the event "stick"
+						);
+					}
+					calendar.fullCalendar('unselect');
+				},
 					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'
 				})
 			});

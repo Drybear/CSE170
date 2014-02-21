@@ -1,7 +1,27 @@
 @extends('layouts.default')
 
 @section('content')
-	
+	<script>
+			$(document).ready(function()
+			{
+				
+				var calendar = $('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,agendaWeek,agendaDay'
+					},
+					editable: true,
+					selectable: true,
+					selectHelper: true,
+					
+					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic',
+					function(date, allDay, jsEvent, view) {
+						var dayEvents = $('#calendar').fullCalendar('clientEvents' function(event){return event.start.sethours(0,0,0,0);});
+					}
+				})
+			});
+		</script>
 
     <!-- Marketing messaging and featurettes
     ================================================== -->
@@ -31,6 +51,7 @@
             <input type="radio"> This year <br>
             <input type="radio"> All time <br>
           </div>
+		
           <br>
           
           <p><a class="btn btn-success" href="#" role="button">Start &raquo;</a></p>

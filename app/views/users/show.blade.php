@@ -10,7 +10,7 @@ Home
 @section('content')
 	<h4>Account Profile</h4>
 	
-  	<div class="well clearfix">
+  	<div class="jumbotron"> 
 	    <div class="col-md-8">
 		    @if ($user->first_name)
 		    	<p>First Name:</strong> {{ $user->first_name }} </p>
@@ -30,7 +30,7 @@ Home
 
 	<h4>Group Memberships:</h4>
 	<?php $userGroups = $user->getGroups(); ?>
-	<div class="well">
+	<div class="jumbotron">
 	    <ul>
 	    	@if (count($userGroups) >= 1)
 		    	@foreach ($userGroups as $group)
