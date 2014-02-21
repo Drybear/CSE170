@@ -1,242 +1,320 @@
-@extends('layouts.default')
+
 <!DOCTYPE html>
-	<script>
-			$(document).ready(function() 
-				{    $("#results").click(function() {                
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> - jsFiddle demo</title>
+  
+  <script type='text/javascript' src='//code.jquery.com/jquery-2.0.2.js'></script>
+  <script src="{{ asset('js/jquery-2.0.2.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('js/restfulizer.js') }}"></script>
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    body{
+    margin: 0px;
+    padding: 0px;
+    background: #EFEFEF;
+    cursor: default;
+    font-size: 12px;
+    font-family: Arial, Tahoma;
+}
+.questionContainer {
+    width: 600px;
+    border: 3px double #CFCFCF;
+    padding: 3px;
+    margin: 10px;
+}
+ul {
+    margin: 0px;
+    padding: 5px;
+}
+ul li {
+    list-style: none;
+}
+a {
+    border: 1px solid #000;
+    padding: 2px 5px;
+    font-weight: bold;
+    font-size: 10px;
+    background: #FFF;
+    cursor: pointer;
+}
+a:hover {
+    background: none;
+}
+.btnContainer {
+    width: 96%;
+    margin: 10px 0px 10px 2%;
+}
+#progressKeeper {
+    width: 600px;
+    height: 25px;
+    border: 3px double #CFCFCF;
+    margin: 0px 10px;
+    padding: 3px;
+}
+.txtStatusBar {
+    margin: 5px 10px;
+    font-weight: bold;
+}
+#progress {
+    background: green;
+    width: 0;
+    height: 25px;
+    -webkit-transition: width 0.3s ease;
+}
+.radius {
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+#resultKeeper {
+    width: 600px;
+    margin: 10px;
+    padding: 3px;
+    border: 3px double #CFCFCF;
+}
+#resultKeeper div {
+    line-height: 20px;
+}
+.totalScore {
+    font-weight: bold;
+}
+input {
+    position: relative;
+    top: 2px;
+}
+h1 {
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 16px;
+    height: 22px;
+    margin: 10px;
+    text-indent: 5px;
+}
+.prev { float: left; }
+.next, .btnShowResult { float: right; }
+.clear { clear: both; }
+.hide { display: none; }
+  </style>
+  
 
-				if (!$("input[@name=q1]:checked").val() ||            
-				!$("input[@name=q2]:checked").val() ||            
-				!$("input[@name=q3]:checked").val() ||            
-				!$("input[@name=q4]:checked").val() ||            
-				!$("input[@name=q5]:checked").val() ||            
-				!$("input[@name=q6]:checked").val() ||            
-				!$("input[@name=q7]:checked").val() ||            
-				!$("input[@name=q8]:checked").val() ||            
-				!$("input[@name=q9]:checked").val() ||            
-				!$("input[@name=q10]:checked").val()            
-				) {            
-				alert("You're not done yet!");        
-				}        
 
-				else {            
-				var cat1name = "1";            
-				var cat2name = "2";            
-				var cat3name = "3";            
-				var cat4name = "4";            
-				var cat5name = "5";            
-				var cat6name = "6";            
-				var cat7name = "7";            
-				var cat8name = "8";            
-				var cat9name = "9";            
-				var cat10name = "10";            
-				var cat11name = "None";            
-							
+<script type='text/javascript'>//<![CDATA[ 
 
-				var cat1 = ($("input[@name=q1]:checked").val() != "a"); 
-						   
-				var cat2 = ($("input[@name=q2]:checked").val() != "b");  
+$(function(){
+    var jQuiz = {
+        answers: { q1: 'd', q2: 'd', q3: 'a', q4: 'c', q5: 'a' },
+        questionLenght: 5,
+        checkAnswers: function() {
+            var arr = this.answers;
+            var ans = this.userAnswers;
+            var resultArr = []
+            for (var p in ans) {
+                var x = parseInt(p) + 1;
+                var key = 'q' + x;
+                var flag = false;
+                if (ans[p] == 'q' + x + '-' + arr[key]) {
+                    flag = true;
+                }
+                else {
+                    flag = false;
+                }
+                resultArr.push(flag);
+            }
+            return resultArr;
+        },
+        init: function(){
+            $('.btnNext').click(function(){
+                if ($('input[type=radio]:checked:visible').length == 0) {
+                            
+                    return false;
+                }
+                $(this).parents('.questionContainer').fadeOut(500, function(){
+                    $(this).next().fadeIn(500);
+                });
+                var el = $('#progress');
+                el.width(el.width() + 120 + 'px');
+            });
+            $('.btnPrev').click(function(){
+                $(this).parents('.questionContainer').fadeOut(500, function(){
+                    $(this).prev().fadeIn(500)
+                });
+                var el = $('#progress');
+                el.width(el.width() - 120 + 'px');
+            })
+            $('.btnShowResult').click(function(){
+                var arr = $('input[type=radio]:checked');
+                var ans = jQuiz.userAnswers = [];
+                for (var i = 0, ii = arr.length; i < ii; i++) {
+                    ans.push(arr[i].getAttribute('id'))
+                }
+            })
+            $('.btnShowResult').click(function(){
+                $('#progress').width(300);
+                $('#progressKeeper').hide();
+                var results = jQuiz.checkAnswers();
+                var resultSet = '';
+                var trueCount = 0;
+                for (var i = 0, ii = results.length; i < ii; i++){
+                    if (results[i] == true) trueCount++;
+                    resultSet += '<div> Question ' + (i + 1) + ' is ' + results[i] + '</div>'
+                }
+                resultSet += '<div class="totalScore">Your total score is ' + trueCount * 20 + ' / 100</div>'
+                $('#resultKeeper').html(resultSet).show();
+            })
+        }
+    };
+    jQuiz.init();
+})
+//]]>  
 
-				var cat3 = ($("input[@name=q3]:checked").val() != "c");  
-
-				var cat4 = ($("input[@name=q4]:checked").val() != "d");  
-
-				var cat5 = ($("input[@name=q5]:checked").val() != "a"); 
-
-				var cat6 = ($("input[@name=q6]:checked").val() != "b");  
-
-				var cat7 = ($("input[@name=q7]:checked").val() != "c"); 
-
-				var cat8 = ($("input[@name=q8]:checked").val() != "d");  
-
-				var cat9 = ($("input[@name=q9]:checked").val() != "a"); 
-
-				var cat10 = ($("input[@name=q10]:checked").val() != "b");  
-
-				var cat11 = (!cat1 && !cat2 && !cat3 && !cat4 && !cat5 && !cat6 && !cat7 && !cat8 && !cat9 && !cat10); var categories = [];                        
-
-				if (cat1) { categories.push(cat1name) };            
-				if (cat2) { categories.push(cat2name) };            
-				if (cat3) { categories.push(cat3name) };            
-				if (cat4) { categories.push(cat4name) };            
-				if (cat5) { categories.push(cat5name) };            
-				if (cat6) { categories.push(cat6name) };            
-				if (cat7) { categories.push(cat7name) };            
-				if (cat8) { categories.push(cat8name) };            
-				if (cat9) { categories.push(cat9name) };            
-				if (cat10) { categories.push(cat10name) };            
-				if (cat11) { categories.push(cat11name) };                        
-
-				var catStr = 'You answered the following questions incorrectly: ' + categories.join(', ') + '';                     
-				$("#categorylist").text(catStr);                        
-				$("#categorylist").show("slow");            
-
-				if (cat1) { $("#category1").show("slow"); };            
-				if (cat2) { $("#category2").show("slow"); };            
-				if (cat3) { $("#category3").show("slow"); };            
-				if (cat4) { $("#category4").show("slow"); };            
-				if (cat5) { $("#category5").show("slow"); };            
-				if (cat6) { $("#category6").show("slow"); };            
-				if (cat7) { $("#category7").show("slow"); };            
-				if (cat8) { $("#category8").show("slow"); };            
-				if (cat9) { $("#category9").show("slow"); };            
-				if (cat10) { $("#category10").show("slow"); };            
-				if (cat11) { $("#category11").show("slow"); };
-				{ $("#closing").show("slow"); };
-				}
-					});});
-	</script>
-</html>
-@section('content')
-<div class="jumbotron">
-	<p style="color:silver" class="question">1. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q1" value="a" id="q1a"><label for="q1a">Answer 1</label><br/>          
-	<input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Answer 2</label><br/>            
-	<input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Answer 3</label><br/>            
-	<input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Answer 4</label><br/>       
-	</ul>        
+</script>
 
 
-	<p style="color:silver" class="question">2. What is the answer to this question?</p>        
+</head>
+<body>
 
-	<ul class="answers">            
-	<input type="radio" name="q2" value="a" id="q2a"><label for="q2a">Answer 1</label><br/>           
-	<input type="radio" name="q2" value="b" id="q2b"><label for="q2b">Answer 2</label><br/>            
-	<input type="radio" name="q2" value="c" id="q2c"><label for="q2c">Answer 3</label><br/>           
-	<input type="radio" name="q2" value="d" id="q2d"><label for="q2d">Answer 4</label><br/>       
-	</ul>        
-
-	<p style="color:silver" class="question">3. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q3" value="a" id="q3a"><label for="q3a">Answer 1</label><br/>            
-	<input type="radio" name="q3" value="b" id="q3b"><label for="q3b">Answer 2</label><br/>            
-	<input type="radio" name="q3" value="c" id="q3c"><label for="q3c">Answer 3</label><br/>           
-	<input type="radio" name="q3" value="d" id="q3d"><label for="q3d">Answer 4</label><br/>       
-	</ul>        
-
-	<p style="color:silver" class="question">4. What is the answer to this question?</p>        
-
-	<ul class="answers">           
-	<input type="radio" name="q4" value="a" id="q4a"><label for="q4a">Answer 1</label><br/>            
-	<input type="radio" name="q4" value="b" id="q4b"><label for="q4b">Answer 2</label><br/>            
-	<input type="radio" name="q4" value="c" id="q4c"><label for="q4c">Answer 3</label><br/>            
-	<input type="radio" name="q4" value="d" id="q4d"><label for="q4d">Answer 4</label><br/>        
-	</ul>        
-
-	<p style="color:silver" class="question">5. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q5" value="a" id="q5a"><label for="q5a">Answer 1</label><br/>            
-	<input type="radio" name="q5" value="b" id="q5b"><label for="q5b">Answer 2</label><br/>            
-	<input type="radio" name="q5" value="c" id="q5c"><label for="q5c">Answer 3</label><br/>           
-	<input type="radio" name="q5" value="d" id="q5d"><label for="q5d">Answer 4</label><br/>        
-	</ul>        
-
-	<p style="color:silver" class="question">6. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q6" value="a" id="q6a"><label for="q6a">Answer 1</label><br/>            
-	<input type="radio" name="q6" value="b" id="q6b"><label for="q6b">Answer 2</label><br/>            
-	<input type="radio" name="q6" value="c" id="q6c"><label for="q6c">Answer 3</label><br/>            
-	<input type="radio" name="q6" value="d" id="q6d"><label for="q6d">Answer 4</label><br/>        
-	</ul>       
-
-	<p style="color:silver" class="question">7. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q7" value="a" id="q7a"><label for="q7a">Answer 1</label><br/>            
-	<input type="radio" name="q7" value="b" id="q7b"><label for="q7b">Answer 2</label><br/>            
-	<input type="radio" name="q7" value="c" id="q7c"><label for="q7c">Answer 3</label><br/>            
-	<input type="radio" name="q7" value="d" id="q7d"><label for="q7d">Answer 4</label><br/>        
-	</ul>        
-
-	<p style="color:silver" class="question">8. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q8" value="a" id="q8a"><label for="q8a">Answer 1</label><br/>            
-	<input type="radio" name="q8" value="b" id="q8b"><label for="q8b">Answer 2</label><br/>            
-	<input type="radio" name="q8" value="c" id="q8c"><label for="q8c">Answer 3</label><br/>            
-	<input type="radio" name="q8" value="d" id="q8d"><label for="q8d">Answer 4</label><br/>       
-	</ul>        
-
-	<p style="color:silver" class="question">9. What is the answer to this question?</p>        
-
-	<ul class="answers">            
-	<input type="radio" name="q9" value="a" id="q9a"><label for="q9a">Answer 1</label><br/>            
-	<input type="radio" name="q9" value="b" id="q9b"><label for="q9b">Answer 2</label><br/>            
-	<input type="radio" name="q9" value="c" id="q9c"><label for="q9c">Answer 3</label><br/>            
-	<input type="radio" name="q9" value="d" id="q9d"><label for="q9d">Answer 4</label><br/>        
-	</ul>        
-
-	<p style="color:silver" class="question">10. What is the answer to this question?</p>        
-
-	<ul class="answers">           
-	<input type="radio" name="q10" value="a" id="q10a"><label for="q10a">Answer 1</label><br/>            
-	<input type="radio" name="q10" value="b" id="q10b"><label for="q10b">Answer 2</label><br/>            
-	<input type="radio" name="q10" value="c" id="q10c"><label for="q10c">Answer 3</label><br/>            
-	<input type="radio" name="q10" value="d" id="q10d"><label for="q10d">Answer 4</label><br/>        
-	</ul>        
-
-	<br/>
-	<div id="results">            
-	Show me the answers!       
-	</div>                
-
-	<div id="category1">            
-	<p>              
-	<strong>Question 1:</strong> The correct answer is the <strong>Answer 1</strong>.</p>        
-	</div>        
-
-	<div id="category2">            
-	<p>              
-	<strong>Question 2:</strong> The correct answer is <strong>Answer 2</strong>.</p>        
-	</div>        
-
-	<div id="category3">            
-	<p>                
-	<strong>Question 3:</strong> The correct answer is <strong>Answer 3</strong>.</p>        
-	</div>        
-
-	<div id="category4">            
-	<p>               
-	<strong>Question 4:</strong> The correct answer is <strong>Answer 4</strong>.</p>        
-	</div>        
-
-	<div id="category5">            
-	<p>                
-	<strong>Question 5:</strong> The correct answer is <strong>Answer 1</strong>.</p>        
-	</div>        
-
-	<div id="category6">            
-	<p>                
-	<strong>Question 6:</strong> The correct answer is <strong>Answer 2</strong>.</p>        
-	</div>        
-
-	<div id="category7">            
-	<p>                
-	<strong>Question 7:</strong> The correct answer is <strong>Answer 3</strong>.</p>        
-	</div>        
-
-	<div id="category8">            
-	<p>               
-	<strong>Question 8:</strong> The correct answer is <strong>Answer 4</strong>.</p>        
-	</div>        
-
-	<div id="category9">           
-	<p>               
-	<strong>Question 9:</strong> The correct answer is <strong>Answer 1</strong>.</p>        
-	</div>        
-
-	<div id="category10">            
-	<p>                
-	<strong>Question 10:</strong> The correct answer is <strong>Answer 2</strong>.</p>        
-	</div>        
-
-	<div id="category11">            
-	<p>                
-	You answered them all right!</p>        
-	</div>
+  <h1>Memdar Quiz</h1>
+<div class="questionContainer radius">
+    <div class="question"><b>Question 1: </b>  When is breakfast Monday Feb 17th?</div>
+    <div class="answers">
+        <ul>
+            <li>
+                <label><input type="radio" name="q1" id="q1-a" />12:00 pm</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q1" id="q1-b" />12:30 am</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q1" id="q1-c" />1:00 pm</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q1" id="q1-d" />11:30 am</label>
+            </li>
+        </ul>
+    </div>
+    <div class="btnContainer">
+        <div class="prev"></div>
+        <div class="next">
+            <a class="btnNext">Next &gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
 </div>
-@stop
+<div class="questionContainer hide radius">
+    <div class="question"><b>Question 2:</b> What are you doing on Wednesday Feb 19th at 9:30am?</div>
+    <div class="answers">
+        <ul>
+            <li>
+                <label><input type="radio" name="q2" id="q2-a" />More stuff</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q2" id="q2-b" />Breakfast</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q2" id="q2-c" />Basketball</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q2" id="q2-d" />Stuff</label>
+            </li>
+        </ul>
+    </div>
+    <div class="btnContainer">
+        <div class="prev">
+            <a class="btnPrev">&lt;&lt; Prev</a>
+        </div>
+        <div class="next">
+            <a class="btnNext">Next &gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="questionContainer radius hide">
+    <div class="question"><b>Question 3:</b> What event takes place 9:30 AM on Thursday February 20th?</div>
+    <div class="answers">
+        <ul>
+            <li>
+                <label><input type="radio" name="q3" id="q3-a" />Memdar Rocks</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q3" id="q3-b" />Pool Party</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q3" id="q3-c" />Business Meeting</label>
+            </li>
+        </ul>
+    </div>
+    <div class="btnContainer">
+        <div class="prev">
+            <a class="btnPrev">&lt;&lt; Prev</a>
+        </div>
+        <div class="next">
+            <a class="btnNext">Next &gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="questionContainer radius hide">
+    <div class="question"><b>Question 4:</b>Are you free the morning of February 24th?</div>
+    <div class="answers">
+        <ul>
+            <li>
+                <label><input type="radio" name="q4" id="q4-a" />Yes, after 11 AM</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q4" id="q4-b" />No</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q4" id="q4-c" />Yes</label>
+            </li>
+        </ul>
+    </div>
+    <div class="btnContainer">
+        <div class="prev">
+            <a class="btnPrev">&lt;&lt; Prev</a>
+        </div>
+        <div class="next">
+            <a class="btnNext">Next &gt;&gt;</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="questionContainer radius hide">
+    <div class="question"><b>Question 5:</b>You have Testtest on Friday February 21st at 12:30pm</div>
+    <div class="answers">
+        <ul>
+            <li>
+                <label><input type="radio" name="q5" id="q5-a" />True</label>
+            </li>
+            <li>
+                <label><input type="radio" name="q5" id="q5-b" />False</label>
+            </li>
+        </ul>
+    </div>
+    <div class="btnContainer">
+        <div class="prev">
+            <a class="btnPrev">&lt;&lt; Prev</a>
+        </div>
+        <div class="next">
+            <a class="btnShowResult">Finish!</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="txtStatusBar">Status Bar</div>
+<div id="progressKeeper" class="radius">
+    <div id="progress"></div>
+</div>
+<div id="resultKeeper" class="radius hide"></div>
+  
+</body>
+
+
+</html>
+

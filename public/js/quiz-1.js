@@ -1,5 +1,4 @@
-<script>
-			$(document).ready(function() 
+(function($) 
 				{    $("#results").click(function() {                
 
 				if (!$("input[@name=q1]:checked").val() ||            
@@ -82,4 +81,3 @@
 				{ $("#closing").show("slow"); };
 				}
 					});});
-	</script>
