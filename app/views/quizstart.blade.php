@@ -179,6 +179,7 @@ $(function(){
 
 </head>
 <body>
+<a class="btn" href="{{ URL::route('home') }}">Memdar</a>
 
   <h1>Memdar Quiz</h1>
 <div class="questionContainer radius">
