@@ -1,0 +1,7 @@
+label {display:block;}
+.quiz {width:300px;}
+.quiz form {padding:3px;border:1px dashed #000;}
+.quiz p {padding:3px;border:1px solid #000;}
+.quiz p b {font:120% verdana;color:#006666;}
+.question {font:90% verdana;color:#006666;margin-bottom:15px;}
+.answers {font:75% verdana;}
