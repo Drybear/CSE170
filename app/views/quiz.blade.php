@@ -46,10 +46,10 @@
             Use events from:
           </div>
           <div>
-            <input type="radio"> This week <br>
-            <input type="radio"> This month <br>
-            <input type="radio"> This year <br>
-            <input type="radio"> All time <br>
+            <input type="radio" name="frequency" value="week"> This week <br>
+            <input type="radio" name="frequency" value="month"> This month <br>
+            <input type="radio" name="frequency" value="year"> This year <br>
+            <input type="radio" name="frequency" valye="all"> All time <br>
           </div>
 		
           <br>
