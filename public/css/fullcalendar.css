@@ -41,7 +41,9 @@ html .fc,
 	}
 	
 .fc-header-center {
-	text-align: center;
+	< /br>
+	align-content: flex-start;
+	white-space: nowrap;
 	}
 	
 .fc-header-right {
@@ -60,7 +62,7 @@ html .fc,
 	}
 	
 .fc .fc-header-space {
-	padding-left: 10px;
+	padding-left: 8px;
 	}
 	
 .fc-header .fc-button {
@@ -83,7 +85,7 @@ html .fc,
 	
 .fc-header .fc-state-hover,
 .fc-header .ui-state-hover {
-	z-index: 2;
+	z-index: 12;
 	}
 	
 .fc-header .fc-state-down {

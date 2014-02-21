@@ -100,14 +100,17 @@
 				
 				var calendar = $('#calendar').fullCalendar({
 					header: {
-						left: 'prev,next today',
-						center: 'title',
-						right: 'month,agendaWeek,agendaDay'
+						left: 'prev,next today,month,agendaWeek,agendaDay,title',
+						center: '',
+						right: ''
 					},
+					
+					
 					editable: true,
 					selectable: true,
 					selectHelper: true,
 					select: function(start, end, allDay)
+					
 				{
 					/*
 						after selection user will be promted for enter title for event.
