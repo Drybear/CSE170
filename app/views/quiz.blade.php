@@ -29,7 +29,7 @@
             <input type="radio" name="frequency" value="week"> This week <br>
             <input type="radio" name="frequency" value="month"> This month <br>
             <input type="radio" name="frequency" value="year"> This year <br>
-            <input type="radio" name="frequency" valye="all"> All time <br>
+            <input type="radio" name="frequency" value="all"> All time <br>
           </div>
           <br>
           
