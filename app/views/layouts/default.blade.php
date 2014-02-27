@@ -20,11 +20,12 @@
 		<!-- Javascripts
 		================================================== -->
 		<script src="{{ asset('js/jquery-2.0.2.min.js') }}"></script>
+		<script src="{{ asset('js/quizconfig.js') }}"></script>
 		<script src="{{ asset('js/jquiz.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/restfulizer.js') }}"></script>
         <script src="{{ asset('js/fullcalendar.js') }}"></script>		
 		<script src="{{ asset('js/gcal.js') }}"></script>
-		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<!--   -->
 
 		<style>

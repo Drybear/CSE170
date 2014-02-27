@@ -53,7 +53,8 @@ Route::get('/', array('as' => 'home', function()
 Route::get('calendar', 'CalendarController@showCalendar');
 Route::get('quiz', 'QuizController@showQuiz');
 Route::get('quizstart', 'QuizstartController@showQuizstart');
-
+Route::get('results', 'ResultsController@showResults');
+Route::get('results.htm', 'ResultsController@showResults');
 // App::missing(function($exception)
 // {
 //     App::abort(404, 'Page not found');
