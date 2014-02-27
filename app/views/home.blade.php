@@ -47,26 +47,6 @@
 <div class="footer">
 	<p>&copy; Memdar</p>
 </div>	
-
-@if (Sentry::check() )
-	<div class="panel panel-success">
-		 <div class="panel-heading">
-			<h3 class="panel-title"><span class="glyphicon glyphicon-ok"></span> {{trans('pages.loginstatus')}}</h3>
-		</div>
-		<div class="container">
-			<p class="lead">
-			<a href='calendar' class="btn btn-danger">Calendar</a>
-		</div>
-		<div class="container">
-			<p class="lead">
-			<a href='quiz' class="btn btn-success">Quiz</a>
-		</div>
-		<!--<div class="panel-body">
-			<p><strong>{{trans('pages.sessiondata')}}:</strong></p>
-			<pre>{{ var_dump(Session::all()) }}</pre>
-		</div>-->
-	</div>
-@endif 
  
  
 @stop
