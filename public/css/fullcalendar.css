@@ -41,8 +41,7 @@ html .fc,
 	}
 	
 .fc-header-center {
-	< /br>
-	align-content: flex-start;
+	width: 35%;
 	white-space: nowrap;
 	}
 	

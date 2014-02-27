@@ -10,14 +10,22 @@
 		<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> -->
 		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 		
-	
-
 		<!-- Optional theme -->
 		<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css"> -->
 		<link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
 		
 		<!-- This is our calendar embed -->
 		<link rel='stylesheet' href="{{ asset('css/fullcalendar.css') }}">
+		
+		<!-- Javascripts
+		================================================== -->
+		<script src="{{ asset('js/jquery-2.0.2.min.js') }}"></script>
+		<script src="{{ asset('js/jquiz.js') }}"></script>
+		<script src="{{ asset('js/restfulizer.js') }}"></script>
+        <script src="{{ asset('js/fullcalendar.js') }}"></script>		
+		<script src="{{ asset('js/gcal.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<!--   -->
 
 		<style>
 			body {
@@ -82,17 +90,6 @@
 		</div>
 
 		<!-- ./ container -->
-
-		<!-- Javascripts
-		================================================== -->
-		<script src="{{ asset('js/jquery-2.0.2.min.js') }}"></script>
-		<script src="{{ asset('js/jquiz.js') }}"></script>
-		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-		<script src="{{ asset('js/restfulizer.js') }}"></script>
-        <script src="{{ asset('js/fullcalendar.js') }}"></script>
-		<script src="{{ asset('js/quiz-1.js') }}"></script> 		
-		<script src="{{ asset('js/gcal.js') }}"></script>
-		<!--   -->
 		
 		<script>
 			$(document).ready(function()
@@ -100,9 +97,9 @@
 				
 				var calendar = $('#calendar').fullCalendar({
 					header: {
-						left: 'prev,next today,month,agendaWeek,agendaDay,title',
-						center: '',
-						right: ''
+						left: 'prev,next',
+						center: 'title',
+						right: 'today'
 					},
 					
 					
