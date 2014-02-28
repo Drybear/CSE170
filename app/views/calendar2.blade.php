@@ -86,7 +86,14 @@
 			<!-- ./ notifications -->
 
 			<!-- Content -->
-			@yield('content')
+			<div class="container">
+				<p class="lead">
+				<a href='calendar' class="btn btn-primary">Month</a>
+				<a href='' class="btn btn-success">Week</a>
+				<a href='calendar3' class="btn btn-primary">Day</a>
+			</div>
+
+			<div id='calendar'></div>
 			<!-- ./ content -->
 		</div>
 
@@ -103,7 +110,7 @@
 						right: 'today'
 					},
 					
-					
+					defaultView: 'basicWeek',
 					editable: true,
 					selectable: true,
 					selectHelper: true,
@@ -138,3 +145,4 @@
 		
 	</body>
 </html>
+
