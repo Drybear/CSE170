@@ -110,7 +110,7 @@
 						right: 'today'
 					},
 					
-					defaultView: 'basicWeek',
+					defaultView: 'agendaWeek',
 					editable: true,
 					selectable: true,
 					selectHelper: true,

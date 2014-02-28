@@ -103,7 +103,6 @@
 						right: 'today'
 					},
 					
-					
 					editable: true,
 					selectable: true,
 					selectHelper: true,

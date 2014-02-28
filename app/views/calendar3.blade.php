@@ -90,7 +90,7 @@
 				<p class="lead">
 				<a href='calendar' class="btn btn-primary">Month</a>
 				<a href='calendar2' class="btn btn-primary">Week</a>
-				<a href='calendar3' class="btn btn-success">Day</a>
+				<a href='' class="btn btn-success">Day</a>
 			</div>
 
 			<div id='calendar'></div>
@@ -110,7 +110,7 @@
 						right: 'today'
 					},
 					
-					defaultView: 'basicDay',
+					defaultView: 'agendaDay',
 					editable: true,
 					selectable: true,
 					selectHelper: true,
