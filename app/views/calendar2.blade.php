@@ -32,7 +32,28 @@
 			body {
 				padding-top: 70px;
 			}
+			h2{
+				font-size: 20px;
+				padding-left: 5px;
+			}
 		</style>
+		<style type="text/css">
+		body
+		{
+			margin-top: 10px;
+			text-align: center;
+			font-size: 14px;
+			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+		#calendar
+		{
+			<br>
+			<br>
+
+			width: 300px;
+			margin: 2 auto;
+		}
+	</style>
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
@@ -86,7 +107,14 @@
 			<!-- ./ notifications -->
 
 			<!-- Content -->
-			@yield('content')
+			<div class="container">
+				<p class="lead">
+				<a href='calendar' class="btn btn-primary">Month</a>
+				<a href='' class="btn btn-success">Week</a>
+				<a href='calendar3' class="btn btn-primary">Day</a>
+			</div>
+
+			<div id='calendar'></div>
 			<!-- ./ content -->
 		</div>
 
@@ -103,6 +131,7 @@
 						right: ''
 					},
 					
+					defaultView: 'agendaWeek',
 					editable: true,
 					selectable: true,
 					selectHelper: true,
@@ -137,3 +166,4 @@
 		
 	</body>
 </html>
+

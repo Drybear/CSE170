@@ -1,2 +1,3 @@
-MEMDAR
-CSE170 Web app project for memory studio
+CSE170
+======
+App created for studio in CSE 170 on Memory. MEMDAR
