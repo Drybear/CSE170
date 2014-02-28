@@ -43,6 +43,7 @@
 		}
 		h2{
 			font-size: 20px;
+			padding-left: 5px;
 		}
 		#calendar
 		{
