@@ -55,12 +55,13 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'l4sentry',
-			'username'  => 'dbuser',
-			'password'  => 'dbpassword',
+			'database'  => 'mysql',
+			'username'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
+			PDO::ATTR_CASE              => PDO::CASE_LOWER,
 		),
 
 		'pgsql' => array(

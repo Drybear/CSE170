@@ -1,95 +1,14 @@
-<?php
+<!--@extends('layouts.default')
 
-$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url); 
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.7) Gecko/20050414 Firefox/1.0.3");
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); 
-$result = curl_exec ($ch); 
-curl_close ($ch);
-
-$decode = json_decode($result, true);
-$eventsList = json_encode(array_value_recursive('$t', $decode));
-$numEvents = substr_count($eventsList, 'When: ')/2;
-
-// echo ("<pre>");
-// print_r($decode);
-// echo ("</pre>");
-
-$x = 0;
-
-$final = array();
-
-while($x < $numEvents){
-	$titleName = implode(",",($decode["feed"]["entry"][$x]["title"]));
-	$comma = strpos($titleName, ',');
-	$eventSize = strlen($titleName);
-	$titleName = substr($titleName, 0, $comma);
-	
-	$eventTime = implode(",",($decode["feed"]["entry"][$x]["content"]));
-	$bracket = strpos($eventTime, '<');
-	$eventSize = strlen($eventTime);
-	$eventTime = substr($eventTime, 6, $bracket);
-	
-	$final[] = array(
-		'title' => $titleName,
-		'time' => $eventTime,
-		);
-	$x++;
-	}
-
-// echo ("<pre>");
-// print_r($final);
-// echo ("</pre>");
-		
-function array_value_recursive($key, array $decode){
-    $val = array();
-    array_walk_recursive($decode, function($v, $k) use($key, &$val){
-        if($k == $key) array_push($val, $v);
-    });
-    return count($val) > 1 ? $val : array_pop($val);
-}
+@section('content')
+<html>
+	<body>
+		<h1>var1</h1>
+	</body>
+</html>
+@stop-->
 
 
-$eventsSize = strlen($eventsList);
-
-
-// $time = 'When: ';
-// $newLine = '\n';
-// $assigner = '=>';
-
-// $time = 'When: ';
-// $newLine = '\n';
-// $space = ' ';
-// $eventFlag = ' Event';
-// $PST = 'PST';
-
-// $timeStart = strpos($eventsList, $time);
-// $timeEnd = strpos($eventsList, $PST);
-//$title = substr($eventsList, $timeStart, $timeEnd);
-
-// $findme = 'When: ';
-// $pos = strpos(array_value_recursive('$t', $decode), $findme);
-
-//var_dump(json_decode($result));
-
-// $jsonIterator = new RecursiveIteratorIterator(
-    // new RecursiveArrayIterator(json_decode($result, TRUE)),
-    // RecursiveIteratorIterator::SELF_FIRST);
-
-// foreach ($jsonIterator as $key => $val) {
-    // if(is_array($val)) {
-        // echo "$key:\n";
-    // } else {
-        // echo "$key => $val\n";
-    // }
-// }
-//print_r(array_values($decode));
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -119,7 +38,50 @@ $eventsSize = strlen($eventsList);
         <script src="{{ asset('js/fullcalendar.js') }}"></script>		
 		<script src="{{ asset('js/gcal.js') }}"></script>
 		<!--   -->
-
+		
+		<script>
+			$(document).ready(function()
+			{
+				
+				var calendar = $('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next',
+						center: 'title',
+						right: ''
+					},
+					
+					editable: true,
+					selectable: true,
+					selectHelper: true,
+					select: function(start, end, allDay)
+					
+				{
+					/*
+						after selection user will be promted for enter title for event.
+					*/
+					var title = prompt('Event Title:');
+					/*
+						if title is enterd calendar will add title and event into fullCalendar.
+					*/
+					if (title)
+					{
+						calendar.fullCalendar('renderEvent',
+							{
+								title: title,
+								start: start,
+								end: end,
+								allDay: allDay
+							},
+							true // make the event "stick"
+						);
+					}
+					calendar.fullCalendar('unselect');
+				},
+					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'
+				})
+			});
+		</script>
+		
 		<style>
 			body {
 				padding-top: 70px;
@@ -178,7 +140,9 @@ $eventsSize = strlen($eventsList);
 			<!-- ./ notifications -->
 
 			<!-- Content -->
-			@yield('content')
+			<?php
+			echo $('#calendar').fullCalendar('clientEvents');
+			?>
 			<!-- ./ content -->
 		</div>
 
@@ -192,49 +156,6 @@ $eventsSize = strlen($eventsList);
 		  ga('create', 'UA-48540804-1', 'memdar.herokuapp.com');
 		  ga('send', 'pageview');
 
-		</script>
-
-		<script>
-			$(document).ready(function()
-			{
-				
-				var calendar = $('#calendar').fullCalendar({
-					header: {
-						left: 'prev,next',
-						center: 'title',
-						right: ''
-					},
-					
-					editable: true,
-					selectable: true,
-					selectHelper: true,
-					select: function(start, end, allDay)
-					
-				{
-					/*
-						after selection user will be promted for enter title for event.
-					*/
-					var title = prompt('Event Title:');
-					/*
-						if title is enterd calendar will add title and event into fullCalendar.
-					*/
-					if (title)
-					{
-						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay
-							},
-							true // make the event "stick"
-						);
-					}
-					calendar.fullCalendar('unselect');
-				},
-					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json'
-								})
-							});
 		</script>
 		
 	</body>

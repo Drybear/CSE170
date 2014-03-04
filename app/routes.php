@@ -57,6 +57,7 @@ Route::get('results', 'ResultsController@showResults');
 Route::get('results.htm', 'ResultsController@showResults');
 Route::get('calendar2', 'Calendar2Controller@showCalendar2');
 Route::get('calendar3', 'Calendar3Controller@showCalendar3');
+Route::get('test', 'TestController@showTest');
 // App::missing(function($exception)
 // {
 //     App::abort(404, 'Page not found');

@@ -9,6 +9,12 @@
 {{-- Content --}}
 @section('content')
 
+<style>
+	body{
+		text-align: center
+		}
+</style>
+
 <div class="jumbotron">
   <div class="container">
     <h1>MEMDAR</h1>
