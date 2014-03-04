@@ -23,15 +23,15 @@
   <tr>
     <td width="100%"><form method="POST" name="result"><table border="0" width="100%" cellpadding="0" height="116">
         <tr>
-          <td height="25" bgcolor="#108A93"><strong><font face="Arial"># of questions you got right:</font></strong></td>
+          <td height="25" bgcolor="#108A93"><strong><font face="Arial"># Correct: </font></strong></td>
           <td height="25"><p><input type="text" name="p" size="24"></td>
         </tr>
         <tr>
-          <td height="17" bgcolor="#108A93"><strong><font face="Arial">The questions you got wrong:</font></strong></td>
+          <td height="17" bgcolor="#108A93"><strong><font face="Arial">Q's Wrong: </font></strong></td>
           <td height="17"><p><textarea name="T2" rows="3" cols="24" wrap="virtual"></textarea></td>
         </tr>
         <tr>
-          <td height="25" bgcolor="#108A93"><strong><font face="Arial">Grade in percentage:</font></strong></td>
+          <td height="25" bgcolor="#108A93"><strong><font face="Arial">Grade: </font></strong></td>
           <td height="25"><input type="text" name="q" size="8"></td>
         </tr>
       </table>

@@ -20,7 +20,7 @@
 @section('content')
 	<div class="container">
 		<p class="lead">
-		<a href='' class="btn btn-success">Month</a>
+		<a href='calendar' class="btn btn-success">Month</a>
 		<a href='calendar2' class="btn btn-primary">Week</a>
 		<a href='calendar3' class="btn btn-primary">Day</a>
 	</div>

@@ -85,7 +85,11 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="{{ URL::route('home') }}">Memdar</a>
+	          @if (Sentry::check())
+				<a class="navbar-brand" href="mylobby">Memdar</a>
+			  @else
+				<a class="navbar-brand" href="{{ URL::route('login') }}">Memdar</a>
+			 @endif
 	        </div>
 	        <div class="collapse navbar-collapse">
 	          <ul class="nav navbar-nav">
