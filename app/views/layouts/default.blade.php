@@ -238,7 +238,7 @@ $eventsSize = strlen($eventsList);
 					}
 					calendar.fullCalendar('unselect');
 				},
-					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json'
+					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'
 								})
 							});
 		</script>
