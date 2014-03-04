@@ -8,17 +8,19 @@
 
 {{-- Content --}}
 @section('content')
-
 <style>
 	body{
 		text-align: center
+		}
+		.panel-success>.panel-heading {
+			color: #000000;
 		}
 </style>
 
 <div class="jumbotron">
   <div class="container">
     <h1>MEMDAR</h1>
-    <p class="lead">Never forget</p>
+    <p class="lead">Never forget {{ Session::get('activate') }}</p>
   </div>
   @if (Sentry::check() )
 	<div class="panel panel-success">

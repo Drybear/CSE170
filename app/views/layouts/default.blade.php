@@ -124,6 +124,12 @@ $eventsSize = strlen($eventsList);
 			body {
 				padding-top: 70px;
 			}
+			alert-success {
+				color: #000000;
+			}
+			.panel-success>.panel-heading {
+				color: #000000;
+			}
 		</style>
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

@@ -43,11 +43,11 @@ Profile</h4>
         </div>
 		
 		<div class="form-group {{ ($errors->has('google')) ? 'has-error' : '' }}" for="google">
-            {{ Form::label('edit_google', 'Google Calendar URL', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('edit_createdAt', 'Google Calendar URL', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-              {{ Form::text('google', $user->google, array('class' => 'form-control', 'placeholder' => 'Google Calendar URL', 'id' => 'edit_google'))}}
+              {{ Form::text('createdAt', $user->createdAt, array('class' => 'form-control', 'placeholder' => 'Google Calendar URL', 'id' => 'edit_createdAt'))}}
             </div>
-            {{ ($errors->has('google') ? $errors->first('google') : '') }}                
+            {{ ($errors->has('createdAt') ? $errors->first('createdAt') : '') }}                
         </div>
 		
 

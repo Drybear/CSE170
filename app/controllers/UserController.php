@@ -264,7 +264,7 @@ class UserController extends BaseController {
         else 
         {
             Session::flash('error', $result['message']);
-            return Redirect::route('profile')
+            return Redirect::route('home')
                 ->withInput()
                 ->withErrors( $this->resendActivationForm->errors() );
         }
