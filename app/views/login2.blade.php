@@ -26,10 +26,10 @@ Log In
 		text-align: center;
 	}
 	body{
-		background-image:url('{{asset('img/brain.jpg')}}');
+		background-image:url('{{asset('img/brain2.jpg')}}');
 		}
 </style>
-
+<div class="container">
 	<div class="row">
 		
 			{{ Form::open(array('action' => 'SessionController@store')) }}
@@ -50,14 +50,15 @@ Log In
 				<label class="checkbox">
 					{{ Form::checkbox('rememberMe', 'rememberMe') }} Remember me
 				</label>
-				{{ Form::submit('Sign In', array('class' => 'btn btn-primary'))}}
-				<a class="btn btn-link" href="{{ route('forgotPasswordForm') }}">Forgot Password</a>
+				{{ Form::submit('Sign In', array('class' => 'btn btn-success'))}}
+				<a class="btn btn-success" href="{{ route('forgotPasswordForm') }}">Forgot Password</a>
 			{{ Form::close() }}
 
 	</div>
 	<div class="row featurrette">
-		<p>Not a member?         <a href='register' class="btn btn-primary">Register</a></p>
+		<p>Not a member?         <a href='register' class="btn btn-danger">Register</a></p>
 	</div>
+</div>
 
 
 @stop
