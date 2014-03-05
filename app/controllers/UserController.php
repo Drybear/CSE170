@@ -94,7 +94,7 @@ class UserController extends BaseController {
 
             // Success!
             Session::flash('success', $result['message']);
-            return Redirect::route('mylobby');
+            return Redirect::route('home');
 
         } else {
             Session::flash('error', $result['message']);

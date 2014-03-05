@@ -63,6 +63,7 @@ Route::get('test', 'TestController@showTest');
 Route::get('mylobby', 'MylobbyController@showMylobby');
 
 Route::get('calendarnew', 'CalendarNewController@showCalendarNew');
+Route::get('login2', 'Login2Controller@showLogin2');
 
 // App::missing(function($exception)
 // {
