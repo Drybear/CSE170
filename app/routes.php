@@ -61,7 +61,7 @@ Route::get('calendar2', 'Calendar2Controller@showCalendar2');
 Route::get('calendar3', 'Calendar3Controller@showCalendar3');
 Route::get('test', 'TestController@showTest');
 Route::get('mylobby', 'MylobbyController@showMylobby');
-Route::get('home', 'HomeController@showWelcome');
+
 Route::get('calendarnew', 'CalendarNewController@showCalendarNew');
 
 // App::missing(function($exception)
