@@ -48,7 +48,7 @@ class SessionController extends BaseController {
             							));
 
             // Success!
-            return Redirect::to('mylobby');
+            return Redirect::to('/mylobby');
 
         } else {
             Session::flash('error', $result['message']);
