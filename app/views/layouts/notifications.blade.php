@@ -1,3 +1,18 @@
+<style>
+	alert.success {
+		color: #000000;
+	}
+		alert.danger{
+		color: #000000;
+	}
+		alert.warning {
+		color: #000000;
+	}
+		alert.info {
+		color: #000000;
+	}
+	
+</style>
 @if ($message = Session::get('success'))
 <div class="alert alert-success alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

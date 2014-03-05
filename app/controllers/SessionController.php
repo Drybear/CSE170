@@ -42,7 +42,9 @@ class SessionController extends BaseController {
         {
             Event::fire('user.login', array(
             							'userId' => $result['sessionData']['userId'],
-            							'email' => $result['sessionData']['email']
+            							'email' => $result['sessionData']['email'],
+										'created_at' => $result['sessionData']['email'],
+										'updated_at' => $result['sessionData']['email'],
             							));
 
             // Success!

@@ -1,0 +1,9 @@
+[
+	{ "date": "1337594400000", "type": "meeting", "title": "CSE 170", "description": "Donuts taste good", "url": "" },
+	{ "date": "1337677200000", "type": "demo", "title": "Lunch", "description": "", "url": "" },
+	{ "date": "1337686200000", "type": "meeting", "title": "Test Project Brainstorming", "description": "Lorem Ipsum dolor set", "url": "" },
+	{ "date": "1337696100000", "type": "test", "title": "A very very long name for a f*cking project events", "description": "", "url": "" },
+	{ "date": "1338890400000", "type": "meeting", "title": "Project B meeting", "description": "Lorem Ipsum dolor set", "url": "" },
+	{ "date": "1339927200000", "type": "demo", "title": "Project A demo", "description": "", "url": "" },
+	{ "date": "1334656800000", "type": "meeting", "title": "Test Project C Brainstorming", "description": "Lorem Ipsum dolor set", "url": "" }
+]

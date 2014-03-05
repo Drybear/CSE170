@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class CalendarNewController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,9 +15,9 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function showCalendarNew()
 	{
-		return View::make('mylobby');
+		return View::make('calendarnew');
 	}
 
 }

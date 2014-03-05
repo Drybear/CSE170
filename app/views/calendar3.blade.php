@@ -121,14 +121,14 @@
 			<!-- ./ notifications -->
 
 			<!-- Content -->
-			<div class="container">
-				<p class="lead">
-				<a href='calendar' class="btn btn-primary">Month</a>
-				<a href='calendar2' class="btn btn-primary">Week</a>
-				<a href='' class="btn btn-success">Day</a>
-			</div>
+				<div class="container">
+					<p class="lead">
+					<a href='calendar' class="btn btn-primary">Month</a>
+					<a href='calendar2' class="btn btn-primary">Week</a>
+					<a href='' class="btn btn-success">Day</a>
+				</div>
 
-			<div id='calendar'></div>
+				<div id='calendar'></div>
 			<!-- ./ content -->
 		</div>
 

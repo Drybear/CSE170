@@ -5,6 +5,25 @@
 @parent
 Edit Profile
 @stop
+<!DOCTYPE html>
+<style>
+	.panel-success>.panel-heading {
+		color: #000000;
+	}
+	alert.success {
+		color: #000000;
+	}
+		alert.danger{
+		color: #000000;
+	}
+		alert.warning {
+		color: #000000;
+	}
+		alert.info {
+		color: #000000;
+	}
+</style>
+</html>
 
 {{-- Content --}}
 @section('content')
@@ -43,14 +62,14 @@ Profile</h4>
         </div>
 		
 		<div class="form-group {{ ($errors->has('google')) ? 'has-error' : '' }}" for="google">
-            {{ Form::label('edit_createdAt', 'Google Calendar URL', array('class' => 'col-sm-2 control-label')) }}
+            {{ Form::label('edit_google', 'Google Calendar URL', array('class' => 'col-sm-2 control-label')) }}
             <div class="col-sm-10">
-              {{ Form::text('createdAt', $user->createdAt, array('class' => 'form-control', 'placeholder' => 'Google Calendar URL', 'id' => 'edit_createdAt'))}}
+              {{ Form::text('google', $user->google, array('class' => 'form-control', 'placeholder' => 'Google Calendar URL', 'id' => 'edit_google'))}}
             </div>
-            {{ ($errors->has('createdAt') ? $errors->first('createdAt') : '') }}                
+            {{ ($errors->has('google') ? $errors->first('google') : '') }}                
         </div>
 		
-
+		
         @if (Sentry::getUser()->hasAccess('admin'))
         <div class="form-group">
             {{ Form::label('edit_memberships', 'Group Memberships', array('class' => 'col-sm-2 control-label'))}}

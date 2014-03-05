@@ -47,10 +47,10 @@ Route::resource('users', 'UserController');
 // Group Routes
 Route::resource('groups', 'GroupController');
 
-// Route::get('/', array('as' => 'home', function()
-// {
-	// return View::make('login');
-// }));
+Route::get('/', array('as' => 'home', function()
+{
+	return View::make('mylobby');
+}));
 
 Route::get('calendar', 'CalendarController@showCalendar');
 Route::get('quiz', 'QuizController@showQuiz');
@@ -61,6 +61,8 @@ Route::get('calendar2', 'Calendar2Controller@showCalendar2');
 Route::get('calendar3', 'Calendar3Controller@showCalendar3');
 Route::get('test', 'TestController@showTest');
 Route::get('mylobby', 'MylobbyController@showMylobby');
+Route::get('home', 'HomeController@showWelcome');
+Route::get('calendarnew', 'CalendarNewController@showCalendarNew');
 
 // App::missing(function($exception)
 // {

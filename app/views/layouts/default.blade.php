@@ -124,10 +124,19 @@ $eventsSize = strlen($eventsList);
 			body {
 				padding-top: 70px;
 			}
-			alert-success {
+			.panel-success>.panel-heading {
 				color: #000000;
 			}
-			.panel-success>.panel-heading {
+			alert.success {
+				color: #000000;
+			}
+				alert.danger{
+				color: #000000;
+			}
+				alert.warning {
+				color: #000000;
+			}
+				alert.info {
 				color: #000000;
 			}
 		</style>
@@ -153,7 +162,7 @@ $eventsSize = strlen($eventsList);
 	            <span class="icon-bar"></span>
 	          </button>
 	          @if (Sentry::check())
-				<a class="navbar-brand" href="mylobby">Memdar</a>
+				<a class="navbar-brand" href="/mylobby">Memdar</a>
 			  @else
 				<a class="navbar-brand" href="{{ URL::route('login') }}">Memdar</a>
 			  @endif

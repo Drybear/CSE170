@@ -6,6 +6,29 @@
 Home
 @stop
 
+<style>
+	alert {
+		color:#000000;
+	}
+	.panel-success>.panel-heading {
+		color: #000000;
+	}
+	alert.success {
+		color: #000000;
+	}
+		alert.danger{
+		color: #000000;
+	}
+		alert.warning {
+		color: #000000;
+	}
+		alert.info {
+		color: #000000;
+	}
+</style>
+</html>
+
+
 {{-- Content --}}
 @section('content')
 	<h4>Account Profile</h4>
@@ -19,8 +42,8 @@ Home
 		    	<p><strong>Last Name:</strong> {{ $user->last_name }} </p>
 			@endif
 		    <p><strong>Email:</strong> {{ $user->email }}</p>
-			@if ($user->created_at)
-				<p>Google Url added!</p>
+			@if ($user->google)
+				<p>Google Url added! {{ $user->google }}</p>
 			@else
 				<p>You must enter your Google URL, click the Edit Profile button</p>
 			@endif
@@ -34,7 +57,7 @@ Home
 			<button class="btn btn-primary" onClick="location.href='{{ action('UserController@edit', array($user->id)) }}'">Edit Profile</button>
 		</div>
 	</div>
-
+	<!-- Groups
 	<h4>Group Memberships:</h4>
 	<?php $userGroups = $user->getGroups(); ?>
 	<div class="jumbotron">
@@ -47,6 +70,7 @@ Home
 				<li>No Group Memberships.</li>
 			@endif
 	    </ul>
+	-->
 	</div>
 	
 	<hr />
