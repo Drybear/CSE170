@@ -49,7 +49,7 @@ Route::resource('groups', 'GroupController');
 
 Route::get('/', array('as' => 'home', function()
 {
-	return View::make('mylobby');
+	return View::make('home');
 }));
 
 Route::get('calendar', 'CalendarController@showCalendar');
