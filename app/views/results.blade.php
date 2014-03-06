@@ -1,13 +1,26 @@
 @extends('layouts.default')
 
 @section('content')
-
+<!DOCTYPE html>
+<style>
+body{
+					background-color: #0D747C;
+}
+td{
+	background-color: #0D747C;
+}
+</style>
 <html>
 
 <head>
 <title>Instant Quiz Results</title>
 <link rel="stylesheet" href="{{ asset('css/results.css') }}">
 </head>
+
+<a href='/mylobby' class="btn btn-danger">Home</a>
+<a href='/quizstart' class="btn btn-danger">Take the quiz again</a>
+<br>
+<br>
 
 <body bgcolor="#FFFFFF">
 
@@ -67,12 +80,35 @@ document.result[1].value+=incorrect[temp]+", "
 
 
 </script>
+<br>
 
-<input type="button" value="Take the quiz again" name="B1"
-  onClick="history.go(-1)"> <input type="button" value="View solution" name="B2"
-  onClick="showsolution()"></p>
+ </p>
   </font></center></div>
 </form>
+
+<script>
+
+document.write('<title>Solution</title>')
+document.write('<body bgcolor="#FFFFFF">')
+document.write('<center><h3>Solution to Quiz</h3></center>')
+document.write('<center><font face="Arial">')
+for (i=1;i<=totalquestions;i++){
+for (temp=0;temp<incorrect.length;temp++){
+if (i==incorrect[temp])
+wrong=1
+}
+if (wrong==1){
+document.write("Question "+i+" = "+correctchoices[i].fontcolor("IndianRed")+"<br>")
+wrong=0
+}
+else
+document.write("Question "+i+" = "+correctchoices[i]+"<br>")
+}
+document.write('</center></font>')
+document.write("<h5>Note: The solutions in red are the ones to the questions you had incorrectly answered.</h5></small>")
+document.close()
+</script>
+
 </body>
 </html>
 

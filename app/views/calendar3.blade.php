@@ -63,6 +63,9 @@
 			width: 300px;
 			margin: 2 auto;
 		}
+		body{
+					background-color: #0D747C;
+}
 	</style>
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -102,7 +105,7 @@
 	            @if (Sentry::check())
 				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="{{ URL::to('/calendar') }}">Calendar</a></li>
 				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="{{ URL::to('/quiz') }}">Quiz</a></li>
-				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="/users/{{ Session::get('userId') }}">{{ Session::get('email') }}</a></li>
+				<li {{ (Request::is('users/show/' . Session::get('userId')) ? 'class="active"' : '') }}><a href="/users/{{ Session::get('userId') }}">Profile</a></li>
 				<li><a href="{{ URL::to('logout') }}">Logout</a></li>
 				@else
 				<li {{ (Request::is('login') ? 'class="active"' : '') }}><a href="{{ URL::to('login') }}">Login</a></li>
@@ -149,6 +152,7 @@
 					editable: true,
 					selectable: true,
 					selectHelper: true,
+					height: 400,
 					select: function(start, end, allDay)
 					
 				{
@@ -159,18 +163,18 @@
 					/*
 						if title is enterd calendar will add title and event into fullCalendar.
 					*/
-					if (title)
-					{
-						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay
-							},
-							true // make the event "stick"
-						);
-					}
+					// if (title)
+					// {
+						// calendar.fullCalendar('renderEvent',
+							// {
+								// title: title,
+								// start: start,
+								// end: end,
+								// allDay: allDay
+							// },
+							// true // make the event "stick"
+						// );
+					// }
 					calendar.fullCalendar('unselect');
 				},
 					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'

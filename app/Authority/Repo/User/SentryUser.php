@@ -20,6 +20,7 @@ class SentryUser extends RepoAbstract implements UserInterface {
 
 		// Enable the Throttling Feature
 		$this->throttleProvider->enable();
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 *

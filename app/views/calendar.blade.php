@@ -25,6 +25,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 			text-align: center;
 			font-size: 14px;
 			font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+			background-color: #0D747C;
 		}
 		#calendar
 		{
@@ -33,6 +34,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 			width: 300px;
 			margin: 2 auto;
+		}
+		
+		.fc-event-title {
+		  display: none;
 		}
 	</style>
 @section('content')

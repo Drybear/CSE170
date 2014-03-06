@@ -1,8 +1,16 @@
 @extends('layouts.default')
 
 <?php
+$google = Sentry::getUser()->google;
+$google = $google."?alt=json";
+$compare1 = substr($google, 0, 37);
+$compare2 = "https://www.google.com/calendar/feeds";
+$flag = strcmp($compare1,$compare2);
 
-$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
+if($flag == 0)
+	$url = $google;
+else
+	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url); 
@@ -14,6 +22,20 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 $result = curl_exec ($ch); 
 curl_close ($ch);
 
+$decode = json_decode($result, true);
+if($decode == NULL){
+	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url); 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.7) Gecko/20050414 Firefox/1.0.3");
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); 
+	$result = curl_exec ($ch); 
+	curl_close ($ch);
+}
 $decode = json_decode($result, true);
 $eventsList = json_encode(array2_value_recursive('$t', $decode));
 $numEvents = substr_count($eventsList, 'When: ')/2;
@@ -34,8 +56,20 @@ while($x < $numEvents){
 	
 	$eventTime = implode(",",($decode["feed"]["entry"][$x]["content"]));
 	$bracket = strpos($eventTime, '<');
+	$tester = substr($eventTime, 0, 5);
+	$tester2 = "Recur";
+	$isRecurring = strcmp($tester, $tester2);
 	$eventSize = strlen($eventTime);
-	$eventTime = substr($eventTime, 5, $bracket);
+	if($isRecurring != 0){
+		$eventSize = strlen($eventTime);
+		$eventTime = substr($eventTime, 5, $bracket);
+	}
+	else{
+		$afterRecurring = strpos($eventTime, 'start:');
+		$eventTime = substr($eventTime, $afterRecurring, $eventSize);
+		$bracket = strpos($eventTime, '<');
+		$eventTime = substr($eventTime, 6, $bracket-1);
+	}
 	
 	$final[] = array(
 		'title' => $titleName,
@@ -129,6 +163,9 @@ $eventsSize = strlen($eventsList);
 				.qselections{
 				font:normal 13px Arial;
 				}
+				body{
+					background-color: #0D747C;
+				}
 				</style>
 
 				<script src="quizconfig.js">
@@ -153,9 +190,13 @@ $eventsSize = strlen($eventsList);
 				<!--3) Script supports unlmited # of questions. Be sure to edit .js file to enter corresponding solutions-->
 
 				<p align="center">
-			
+				
 				<form method="POST" name="myquiz">
-
+				
+				<a href='/mylobby' class="btn btn-danger">Home</a>
+				<a href='/quizstart' class="btn btn-danger">New Questions</a>
+				<br>
+				<br>
 				<font face="Arial"><big><big>Calendar Quiz</big></big></font></p>
 				<?php 
 					$random = rand(0, $numEvents-1);
@@ -233,6 +274,8 @@ $eventsSize = strlen($eventsList);
 				<div align="center"><font color ="000000">
 				<input type="button" value="Grade Me!" name="B1" onClick="gradeit()"> <input type="button" value="Reset" name="B2" onClick="document.myquiz.reset()"></font></div>
 				</form>
+				
+				<br><br>
 
 				</body>
 				</html>

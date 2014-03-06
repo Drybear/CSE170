@@ -21,7 +21,7 @@
 					}
 				})
 			});
-		</script>
+	</script>
 
     <!-- Marketing messaging and featurettes
     ================================================== -->

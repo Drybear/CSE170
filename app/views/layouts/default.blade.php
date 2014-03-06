@@ -1,6 +1,14 @@
 <?php
+$google = Sentry::getUser()->google;
+$google = $google."?alt=json";
+$compare1 = substr($google, 0, 37);
+$compare2 = "https://www.google.com/calendar/feeds";
+$flag = strcmp($compare1,$compare2);
 
-$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
+if($flag == 0)
+	$url = $google;
+else
+	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url); 
@@ -12,6 +20,20 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 $result = curl_exec ($ch); 
 curl_close ($ch);
 
+$decode = json_decode($result, true);
+if($decode == NULL){
+	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url); 
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/6.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.7) Gecko/20050414 Firefox/1.0.3");
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); 
+	$result = curl_exec ($ch); 
+	curl_close ($ch);
+}
 $decode = json_decode($result, true);
 $eventsList = json_encode(array_value_recursive('$t', $decode));
 $numEvents = substr_count($eventsList, 'When: ')/2;
@@ -32,8 +54,20 @@ while($x < $numEvents){
 	
 	$eventTime = implode(",",($decode["feed"]["entry"][$x]["content"]));
 	$bracket = strpos($eventTime, '<');
+	$tester = substr($eventTime, 0, 5);
+	$tester2 = "Recur";
+	$isRecurring = strcmp($tester, $tester2);
 	$eventSize = strlen($eventTime);
-	$eventTime = substr($eventTime, 6, $bracket);
+	if($isRecurring != 0){
+		$eventSize = strlen($eventTime);
+		$eventTime = substr($eventTime, 5, $bracket);
+	}
+	else{
+		$afterRecurring = strpos($eventTime, 'start:');
+		$eventTime = substr($eventTime, $afterRecurring, $eventSize);
+		$bracket = strpos($eventTime, '<');
+		$eventTime = substr($eventTime, 6, $bracket-1);
+	}
 	
 	$final[] = array(
 		'title' => $titleName,
@@ -92,6 +126,7 @@ $eventsSize = strlen($eventsList);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8" />
 		<title> Memdar </title>
@@ -107,7 +142,7 @@ $eventsSize = strlen($eventsList);
 		<link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
 		
 		<!-- This is our calendar embed -->
-	<link rel='stylesheet' href="{{ asset('css/fullcalendar.css') }}">
+		<link rel='stylesheet' href="{{ asset('css/fullcalendar.css') }}">
 		
 		<!-- Javascripts
 		================================================== -->
@@ -139,6 +174,7 @@ $eventsSize = strlen($eventsList);
 				alert.info {
 				color: #000000;
 			}
+		
 		</style>
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -227,6 +263,7 @@ $eventsSize = strlen($eventsList);
 					editable: true,
 					selectable: true,
 					selectHelper: true,
+					height: 700,
 					select: function(start, end, allDay)
 					
 				{
@@ -237,6 +274,7 @@ $eventsSize = strlen($eventsList);
 					/*
 						if title is enterd calendar will add title and event into fullCalendar.
 					*/
+					/* Event inline
 					if (title)
 					{
 						calendar.fullCalendar('renderEvent',
@@ -249,6 +287,8 @@ $eventsSize = strlen($eventsList);
 							true // make the event "stick"
 						);
 					}
+					*/
+					
 					calendar.fullCalendar('unselect');
 				},
 					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'
