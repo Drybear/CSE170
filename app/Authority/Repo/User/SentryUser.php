@@ -20,8 +20,6 @@ class SentryUser extends RepoAbstract implements UserInterface {
 
 		// Enable the Throttling Feature
 		$this->throttleProvider->enable();
-	}
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -72,6 +70,7 @@ class SentryUser extends RepoAbstract implements UserInterface {
 		    // Update the user details
 		    $user->first_name = e($data['firstName']);
 		    $user->last_name = e($data['lastName']);
+			$user->google = e($data['google']);
 
 		    // Only Admins should be able to change group memberships. 
 		    $operator = $this->sentry->getUser();
