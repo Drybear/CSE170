@@ -1,4 +1,5 @@
 <?php
+if(Sentry::check()){
 $google = Sentry::getUser()->google;
 $google = $google."?alt=json";
 $compare1 = substr($google, 0, 37);
@@ -7,6 +8,9 @@ $flag = strcmp($compare1,$compare2);
 
 if($flag == 0)
 	$url = $google;
+else
+	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
+}
 else
 	$url = "https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic?alt=json";
 
