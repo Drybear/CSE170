@@ -1,10 +1,11 @@
 <?php
 if(Sentry::check()){
-$google = Sentry::getUser()->google;
-$google = $google."?alt=json";
-$compare1 = substr($google, 0, 37);
+$googleCal = Sentry::getUser()->google;
+$compare1 = substr($googleCal, 0, 37);
 $compare2 = "https://www.google.com/calendar/feeds";
 $flag = strcmp($compare1,$compare2);
+
+$google = $googleCal."?alt=json";
 
 if($flag == 0)
 	$url = $google;
@@ -252,7 +253,7 @@ $eventsSize = strlen($eventsList);
 		  ga('send', 'pageview');
 
 		</script>
-
+		@if(Sentry::check())
 		<script>
 			$(document).ready(function()
 			{
@@ -295,10 +296,10 @@ $eventsSize = strlen($eventsList);
 					
 					calendar.fullCalendar('unselect');
 				},
-					events: 'https://www.google.com/calendar/feeds/cse170memdar%40gmail.com/public/basic'
+					events: <?php echo "'" . $googleCal . "'";?>
 								})
 							});
 		</script>
-		
+		@endif
 	</body>
 </html>

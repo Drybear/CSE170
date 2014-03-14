@@ -6,7 +6,7 @@
 Home
 @stop
 
-<style>
+<style type="text/css">
 	alert {
 		color:#000000;
 	}
@@ -25,15 +25,26 @@ Home
 		alert.info {
 		color: #000000;
 	}
+	body{
+		background-color: #0D747C;
+	}
 </style>
-</html>
+
 
 
 {{-- Content --}}
 @section('content')
+
 	<h4>Account Profile</h4>
 	
   	<div class="jumbotron"> 
+		<div class="col-md-4">
+			<!--
+			<p><em>Account created: {{ $user->created_at }}</em></p>
+			<p><em>Last Updated: {{ $user->updated_at }}</em></p>
+			-->
+			<button class="btn btn-primary" onClick="location.href='{{ action('UserController@edit', array($user->id)) }}'">Edit Profile</button>
+		</div>
 	    <div class="col-md-8">
 		    @if ($user->first_name)
 		    	<p>First Name:</strong> {{ $user->first_name }} </p>
@@ -41,20 +52,32 @@ Home
 			@if ($user->last_name)
 		    	<p><strong>Last Name:</strong> {{ $user->last_name }} </p>
 			@endif
-		    <p><strong>Email:</strong> {{ $user->email }}</p>
+				<p><strong>Email:</strong> {{ $user->email }}</p>
 			@if ($user->google)
 				<p>Google Url added! {{ $user->google }}</p>
 			@else
 				<p>You must enter your Google URL, click the Edit Profile button</p>
+				<div id="slot">
+					<h3>You must enter your Google URL.</h3>
+					<p> First, make your Google calendar public, follow these steps: </p>
+					<ol>
+					<li>In the Google Calendar interface, locate the "My Calendar" box on the left.</li>
+					<li>Click the arrow next to the calendar you need.</li>
+					<li>A menu will appear. Click "Share this calendar."</li>
+					<li>Check "Make this calendar public."</li>
+					<li>Make sure "Share only my free/busy information" is unchecked.</li>
+					<li>Click "Save."</li>
+				</div>
+				<div id="slot">
+					<p> To obtain your calendar's private address, follow these steps:</p>
+					<ol>
+					<li>On your Google calendar, in the calendar list on the left, move your mouse over the appropriate calendar. Click the drop-down arrow that appears, then select Calendar settings.</li>
+					<li>Select the XML button on the calendar's settings page. A pop-up window with your calendar's private URL will appear.</li>
+					<li>Enter this URL into your Google Calendar URL setting.</li>
+					</ol>
+				</div>
 			@endif
 		    
-		</div>
-		<div class="col-md-4">
-			<!--
-			<p><em>Account created: {{ $user->created_at }}</em></p>
-			<p><em>Last Updated: {{ $user->updated_at }}</em></p>
-			-->
-			<button class="btn btn-primary" onClick="location.href='{{ action('UserController@edit', array($user->id)) }}'">Edit Profile</button>
 		</div>
 	</div>
 	<!-- Groups

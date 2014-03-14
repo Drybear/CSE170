@@ -1,9 +1,10 @@
 <?php
 $googleCal = Sentry::getUser()->google;
-$google = $googleCal."?alt=json";
-$compare1 = substr($google, 0, 37);
+$compare1 = substr($googleCal, 0, 37);
 $compare2 = "https://www.google.com/calendar/feeds";
 $flag = strcmp($compare1,$compare2);
+
+$google = $googleCal."?alt=json";
 
 if($flag == 0)
 	$url = $google;
@@ -300,7 +301,7 @@ $eventsSize = strlen($eventsList);
 					*/
 					calendar.fullCalendar('unselect');
 				},
-					events: 'https://www.google.com/calendar/feeds/drybeargamers6%40gmail.com/public/basic'
+					events: <?php echo "'" . $googleCal . "'";?>
 				})
 			});
 		</script>
